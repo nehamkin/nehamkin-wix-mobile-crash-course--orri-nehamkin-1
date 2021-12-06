@@ -28,8 +28,6 @@ const AddPost = (props) => {
         });
       }
 
-      //did this commit
-
 
     return (
         <View style={styles.container}> 
