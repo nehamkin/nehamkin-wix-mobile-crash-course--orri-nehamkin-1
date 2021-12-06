@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import * as postsActions from '../posts.actions';
 
 
 

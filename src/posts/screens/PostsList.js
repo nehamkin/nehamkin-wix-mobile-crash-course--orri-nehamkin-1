@@ -1,34 +1,47 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {Navigation, NavigationComponentProps, NavigationFunctionComponent} from 'react-native-navigation';
+import { useNavigationButtonPress } from 'react-native-navigation-hooks';
+import {useConnect} from 'remx';
+import {postsStore} from '../posts.store';
+import * as postsActions from '../posts.actions';
+
 
 const PostsList = (props) => {
 
 
+    const {posts} = useConnect(() => ({
+      posts: postsStore.getPosts(),
+    }));
 
-    Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
-        if (buttonId === 'addPost')
+    useEffect(()=>{
+      postsActions.fetchPosts();
+    },[])
+
+    useEffect(() => {const listener = Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
+          if (buttonId === 'addPost')
             showAddPostModal()
-    });
+          return listener.remove();
+    })},[]);
     
-    const pushViewPostScreen = () => {
-        Navigation.push(props.componentId, {
+    const pushViewPostScreen = useCallback((post) => {
+      Navigation.push(props.componentId, {
         component: {
-            name: 'blog.ViewPost',
-            passProps: {
-            somePropToPass: 'Some props that we are passing'
-            },
-            options: {
+          name: 'blog.ViewPost',
+          passProps: {
+            post
+          },
+          options: {
             topBar: {
-                title: {
+              title: {
                 text: 'Post1'
-                }
+              }
             }
-            }
+          }
         }
-        });
-    }
+      })}, [props.componentId]
+  );
 
     const showAddPostModal = () => {
         Navigation.showModal({
@@ -47,6 +60,7 @@ const PostsList = (props) => {
   return (
       <View style={styles.container}>
         <Text style={styles.text} onPress={pushViewPostScreen}>PostsList Screen</Text>
+        <Text>{JSON.stringify(posts)}</Text>
       </View>
     )
 }
