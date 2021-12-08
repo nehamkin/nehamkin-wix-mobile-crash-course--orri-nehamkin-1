@@ -1,66 +1,16 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "Post 1",
-      "text": "Scientists have developed catalysts that can convert carbon dioxide – the main cause of global warming – into plastics, fabrics, resins and other products. The discovery, based on the chemistry of artificial photosynthesis, is detailed in the journal Energy & Environmental Science.",
-      "author": "Post 1 text",
-      "img": "http://picsum.photos/200/200/?image=1"
-    },
-    {
-      "id": 2,
-      "title": "Post 2",
-      "text": "It is one of the blessings of old friends that you can afford to be stupid with them.",
-      "author": "Post 2 text",
-      "img": "http://picsum.photos/200/200/?image=2"
-    },
-    {
-      "title": "",
-      "text": "",
-      "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 3
-    },
-    {
       "title": "1",
-      "text": "",
+      "text": "Sfgbhsfgndfghndh",
       "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 4
+      "id": 1
     },
     {
-      "title": "12",
-      "text": "",
+      "title": "2",
+      "text": "Sfghbdgndfgndghn",
       "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 5
-    },
-    {
-      "title": "123",
-      "text": "",
-      "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 6
-    },
-    {
-      "title": "1234",
-      "text": "",
-      "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 7
-    },
-    {
-      "title": "12345",
-      "text": "",
-      "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 8
-    },
-    {
-      "title": "123456",
-      "text": "",
-      "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 9
-    },
-    {
-      "title": "Orri is the greatest",
-      "text": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-      "img": "https://picsum.photos/200/200/?image=undefined",
-      "id": 10
+      "id": 2
     }
   ]
 }

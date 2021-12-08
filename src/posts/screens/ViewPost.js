@@ -1,34 +1,43 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
-import PropTypes from 'prop-types';
-import { Navigation } from 'react-native-navigation';
+import {StyleSheet} from 'react-native';
+// import {Text} from 'react-native';
+import {Text} from 'react-native-ui-lib';
+//import {View} from 'react-native';
+import {View} from 'react-native-ui-lib';
+// import {Button} from 'react-native';
+import {Button} from 'react-native-ui-lib';
 
+import {Navigation} from 'react-native-navigation';
+import {deletePost} from '../posts.actions';
 
-const ViewPost = (props) => {
+const ViewPost = props => {
+  const onPostDeletePressed = async () => {
+    Navigation.pop(props.componentId);
+    await deletePost(props.post.id);
+  };
 
-
-    const onPostDeletePressed = () => {
-        //In here we will request from the server to delete the post
-        Navigation.pop(props.componentId);
-        setTimeout(() => {
-            alert('Post deleted');
-        }, 500);
-    }
-
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>ViewPost Screen</Text>
-        <Text>{props.somePropToPass}</Text>
-        <Button
-          title="Delete Post"
-          onPress={onPostDeletePressed}
-          color={'red'}
-        />
+  return (
+    <View flex spread padding-24>
+      <View>
+        <Text text30 purple10>
+          {props.post.text}
+        </Text>
+        <Text text70 dark20 marginT-12>
+          {props.somePropToPass}
+        </Text>
       </View>
-    );
-  
-}
+      {/* <Button title="Delete Post" onPress={onPostDeletePressed} color={'red'} /> */}
+      <Button
+        label="Delete Post"
+        text80
+        red20
+        bg-red70
+        fullWidth
+        onPress={this.onPostDeletePressed}
+      />
+    </View>
+  );
+};
 export default ViewPost;
 const styles = StyleSheet.create({
   container: {
@@ -42,9 +51,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  delete:{
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-  }
+  delete: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
 });
