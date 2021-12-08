@@ -1,41 +1,71 @@
 
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect, useCallback} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import { useNavigationButtonPress } from 'react-native-navigation-hooks/dist';
 import * as postsActions from '../posts.actions';
 
 
 
 const AddPost = (props) => {
 
-    Navigation.events().registerNavigationButtonPressedListener(({buttonId}) => {
-        if (buttonId === 'cancelBtn') {
-          Navigation.dismissModal(props.componentId);
-        } else if (buttonId === 'saveBtn') {
-            Navigation.dismissModal(props.componentId);
-            alert('saveBtn');
-        }
-      })
-
-      const onChangeText = (text) => {
-        Navigation.mergeOptions(props.componentId, {
-          topBar: {
-            rightButtons: [{
-              id: 'saveBtn',
-              text: 'Save',
-              enabled: !!text
-            }]
-          }
+  const [title, setTitle] = useState("")
+  const [text, setText] = useState("");
+  
+      const onSavePressed = () => {
+        console.log('title', title)
+        postsActions.addPost({
+          title: title,
+          text: text,
+          img: `https://picsum.photos/200/200/?image=${randomImageNumber}`
         });
+        Navigation.dismissModal(props.componentId);
+        const randomImageNumber = Math.floor((Math.random() * 500) + 1);
       }
+
+    useNavigationButtonPress((e)=>{
+        if(e.buttonId === 'cancelBtn')
+          Navigation.dismissModal(props.componentId)
+        else if(e.buttonId === 'saveBtn'){
+          onSavePressed()
+          alert('saveBtn')
+        }
+    })
+
+      const onChangeText = text => {
+        setText(text)
+      };
+
+      const onChangeTitle = title => {
+        setTitle(title)
+      };
+
+      useEffect(()=>{
+        Navigation.mergeOptions(props.componentId, {
+              topBar: {
+                rightButtons: [{
+                  id: 'saveBtn',
+                  text: 'Save',
+                  enabled: !!title
+                }]
+              }
+            })
+      }, [title])
+
 
 
     return (
         <View style={styles.container}> 
             <Text style={styles.text}>AddPost Screen</Text>
             <TextInput
-                placeholder="Start writing to enable the save btn"
-                onChangeText={onChangeText}
+              placeholder="Add a Catchy Title"
+              value={title}
+              onChangeText={onChangeTitle}
+            />
+            <TextInput
+              placeholder="This is the beginning of a great post"
+              value={text}
+              onChangeText={onChangeText}
             />
         </View>
     );

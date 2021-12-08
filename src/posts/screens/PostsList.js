@@ -18,14 +18,14 @@ const PostsList = (props) => {
     useEffect(()=>{
       postsActions.fetchPosts();
     },[])
-
-    useEffect(() => {const listener = Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
-          if (buttonId === 'addPost')
-            showAddPostModal()
-          return listener.remove();
-    })},[]);
     
+    useNavigationButtonPress((e)=>{
+      if(e.buttonId === 'addPost')
+        showAddPostModal();
+    })
+
     const pushViewPostScreen = useCallback((post) => {
+      
       Navigation.push(props.componentId, {
         component: {
           name: 'blog.ViewPost',
